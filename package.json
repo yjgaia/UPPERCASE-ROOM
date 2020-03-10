@@ -1,8 +1,8 @@
 {
 	"name": "uppercase-room",
-	"version": "2.0.0-beta.0",
+	"version": "2.0.0-beta.1",
 	"dependencies": {
-		"uppercase-core": "latest",
+		"uppercase-core": "^2.0.0-beta.0",
 		"bufferutil": "latest",
 		"utf-8-validate": "latest",
 		"ws": "latest"
