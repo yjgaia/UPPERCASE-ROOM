@@ -12517,7 +12517,7 @@ global.WEB_SERVER = CLASS((cls) => {
 											if (isFinal === true) {
 												headers['ETag'] = 'FINAL';
 											} else if (version !== undefined) {
-												headers['ETag'] = version.trim();
+												headers['ETag'] = version;
 											}
 										}
 										
@@ -12530,6 +12530,12 @@ global.WEB_SERVER = CLASS((cls) => {
 												
 												// writeHead에서 오류 발생 여지 있음
 												try {
+													
+													// 줄바꿈 제거
+													EACH(headers, (value, name) => {
+														headers[name] = value.trim();
+													});
+													
 													nativeRes.writeHead(statusCode, headers);
 													nativeRes.end(buffer, encoding);
 												} catch (error) {
@@ -12540,6 +12546,12 @@ global.WEB_SERVER = CLASS((cls) => {
 		
 										// when not encoding
 										else {
+											
+											// 줄바꿈 제거
+											EACH(headers, (value, name) => {
+												headers[name] = value.trim();
+											});
+											
 											nativeRes.writeHead(statusCode, headers);
 											nativeRes.end(buffer !== undefined ? buffer : String(content), encoding);
 										}
@@ -12816,7 +12828,7 @@ global.WEB_SERVER = CLASS((cls) => {
 												statusCode : 302,
 												headers : {
 													'Location' : '/' + originalURI + '?' + Querystring.stringify(COMBINE([params, {
-														version : version.trim()
+														version : version
 													}]))
 												}
 											},
